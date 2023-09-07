@@ -324,7 +324,7 @@ RCT_EXPORT_METHOD(read:(NSString *)filepath
     }
 
     // Seek to the position if there is one.
-    [file seekToFileOffset: (int)position];
+    [file seekToFileOffset: (long)position];
 
     NSData *content;
     if ((int)length > 0) {
@@ -884,7 +884,7 @@ RCT_EXPORT_METHOD(copyAssetsVideoIOS: (NSString *) imageUri
       NSURL *url = [(AVURLAsset *)asset URL];
       NSLog(@"Final URL %@",url);
       BOOL writeResult = false;
-        
+
       if (@available(iOS 9.0, *)) {
           NSURL *destinationUrl = [NSURL fileURLWithPath:destination relativeToURL:nil];
           writeResult = [[NSFileManager defaultManager] copyItemAtURL:url toURL:destinationUrl error:&error];
@@ -892,7 +892,7 @@ RCT_EXPORT_METHOD(copyAssetsVideoIOS: (NSString *) imageUri
           NSData *videoData = [NSData dataWithContentsOfURL:url];
           writeResult = [videoData writeToFile:destination options:NSDataWritingAtomic error:&error];
       }
-        
+
       if(writeResult) {
         NSLog(@"video success");
       }
