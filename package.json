@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
-    "dts": "npx -p typescript tsc FS.common.js --declaration --allowJs --emitDeclarationOnly --outDir types\n"
+    "dts": "npx -p typescript tsc FS.common.js --declaration --allowJs --emitDeclarationOnly --outfile index.d.ts"
   },
   "repository": {
     "type": "git",
