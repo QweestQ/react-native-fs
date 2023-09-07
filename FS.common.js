@@ -348,6 +348,15 @@ var RNFS = {
     });
   },
 
+  chunkFromFile(filepath: string, length: number = 0, position: number = 0, chunkPath: string): Promise<string> {
+    return RNFSManager.chunkFromFile(
+      normalizeFilePath(filepath),
+      length,
+      position,
+      normalizeFilePath(chunkPath)
+    ).then((chunkPath) => chunkPath);
+  },
+
   // Android only
   readFileAssets(filepath: string, encodingOrOptions?: any): Promise<string> {
     if (!RNFSManager.readFileAssets) {
