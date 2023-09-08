@@ -251,6 +251,31 @@ public class RNFSManager extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void chunkFromFile(
+    String filepath,
+    int length,
+    double position,
+    String chunkPath,
+    Promise promise
+  ) {
+    try {
+      InputStream inputStream = getInputStream(filepath);
+      byte[] buffer = new byte[length];
+      inputStream.skip((long) position);
+      inputStream.read(buffer, 0, length);
+
+      OutputStream outputStream = getOutputStream(chunkPath, false);
+      outputStream.write(buffer);
+      outputStream.close();
+
+      promise.resolve(chunkPath);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      reject(promise, filepath, ex);
+    }
+  }
+
+  @ReactMethod
   public void readFileAssets(String filepath, Promise promise) {
     InputStream stream = null;
     try {
